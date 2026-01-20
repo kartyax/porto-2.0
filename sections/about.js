@@ -9,6 +9,7 @@ document.getElementById('about-container').innerHTML = `
 
             <!-- Character Sprite -->
             <div class="character-container">
+                <h2 class="floating-title">About Me</h2>
                 <img src="assets/pixel-removebg-preview.png" alt="Kevin Character" class="character-sprite"
                     id="characterSprite">
             </div>

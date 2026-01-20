@@ -205,6 +205,10 @@ textarea.form-input {
 }
 
 @media screen and (max-width: 480px) {
+    .contact-section {
+        padding: 40px 15px 40px;
+        /* Reduced padding for small screens */
+    }
 
     .contact-info,
     .contact-form {
