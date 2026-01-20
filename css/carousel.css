@@ -7,7 +7,7 @@
     position: relative;
     width: 100%;
     overflow: hidden;
-    padding: 2rem 0;
+    padding: 1rem 0;
 }
 
 .carousel-wrapper {
@@ -85,16 +85,23 @@
 }
 
 /* Navigation Arrows */
+/* Navigation Arrows */
 .carousel-nav {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
+    left: 0;
     width: 100%;
+    transform: translateY(-50%);
     display: flex;
     justify-content: space-between;
     pointer-events: none;
-    z-index: 15;
-    padding: 0 1rem;
+    z-index: 100;
+    /* Increased Z-Index significantly */
+    padding: 0;
+}
+
+.carousel-arrow {
+    pointer-events: auto;
 }
 
 .carousel-arrow {
@@ -103,7 +110,7 @@
     background: var(--bg-card);
     color: var(--primary-color);
     border: 4px solid var(--primary-color);
-    padding: 1rem 1.5rem;
+    padding: 1rem;
     cursor: pointer;
     pointer-events: all;
     transition: var(--transition-fast);

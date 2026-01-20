@@ -603,7 +603,7 @@ fadeOutStyle.textContent = `
 `;
 document.head.appendChild(fadeOutStyle);
 
-console.log('📝 Contact form ready!');
+console.log('Contact form ready!');
 
 document.addEventListener('click', function (e) {
     const card = e.target.closest('.level-card');
@@ -632,7 +632,7 @@ function showProjects(level) {
 
     setTimeout(() => {
         levelSelector.style.display = 'none';
-        projectsGrid.style.display = 'grid';
+        projectsGrid.style.display = 'grid'; // Container is grid, but inner level-projects will be block for carousel
         projectsGrid.classList.add('active');
 
         levelProjectsContainers.forEach(container => {
@@ -641,7 +641,9 @@ function showProjects(level) {
 
         const selectedProjects = document.querySelector(`.level-projects[data-level="${level}"]`);
         if (selectedProjects) {
-            selectedProjects.style.display = 'grid';
+            selectedProjects.style.display = 'block'; // Changed to block for carousel
+            // Initialize Carousel
+            initCarousel(selectedProjects);
         }
 
         if (projectSubtitle) {
@@ -658,6 +660,10 @@ function showLevelSelector() {
 
     if (!levelSelector || !projectsGrid) return;
 
+    // Destroy carousel if needed (optional cleanup could go here)
+    // For now we just hide it, but ideally we should reset the DOM if we want a fresh start
+    // A simple page reload or re-injection handles clean state usually, but here we just hide.
+
     projectsGrid.classList.remove('active');
     projectsGrid.style.display = 'none';
 
@@ -669,24 +675,113 @@ function showLevelSelector() {
     }
 }
 
-console.log('Level selector system ready!');
+console.log('🎮 Level selector system ready!');
 
+// ============================================
+// CAROUSEL LOGIC
+// ============================================
 function initCarousel(levelContainer) {
-    const projects = levelContainer.querySelectorAll('.project-card');
+    // Check if already initialized to avoid duplication
+    if (levelContainer.querySelector('.carousel-wrapper')) return;
 
+    const projects = Array.from(levelContainer.querySelectorAll('.project-card'));
     if (projects.length === 0) return;
 
+    // Create Structure
     const wrapper = document.createElement('div');
     wrapper.className = 'carousel-wrapper';
 
     const track = document.createElement('div');
     track.className = 'carousel-track';
 
+    // Move projects into track
     projects.forEach(project => {
-        track.appendChild(project.cloneNode(true));
+        track.appendChild(project);
     });
 
+    // Navigation (Arrows)
+    const nav = document.createElement('div');
+    nav.className = 'carousel-nav';
+    nav.innerHTML = `
+        <button class="carousel-arrow prev">&lt;</button>
+        <button class="carousel-arrow next">&gt;</button>
+    `;
+
+    // Dots
+    const dotsContainer = document.createElement('div');
+    dotsContainer.className = 'carousel-dots';
+    projects.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
+        dot.addEventListener('click', () => updateCarousel(index));
+        dotsContainer.appendChild(dot);
+    });
+
+    // Counter
+    const counter = document.createElement('div');
+    counter.className = 'carousel-counter';
+    counter.innerHTML = `PROJECT <span class="current">1</span> / ${projects.length}`;
+
+    // Assemble
     wrapper.appendChild(track);
-    levelContainer.innerHTML = '';
+    // wrapper.appendChild(nav); // MOVED OUTSIDE to prevent overflow:hidden clipping
+    levelContainer.innerHTML = ''; // Clear original container
     levelContainer.appendChild(wrapper);
+    levelContainer.appendChild(nav); // Appended to container
+    levelContainer.appendChild(dotsContainer);
+    levelContainer.appendChild(counter);
+
+    // State
+    let currentIndex = 0;
+    const cards = track.querySelectorAll('.project-card');
+
+    function updateCarousel(index) {
+        if (index < 0) index = 0;
+        if (index >= cards.length) index = cards.length - 1;
+        currentIndex = index;
+
+        // Update Classes (Active / Scale effect)
+        cards.forEach((card, i) => {
+            card.classList.remove('active');
+            if (i === currentIndex) card.classList.add('active');
+        });
+
+        // Calculate Translate
+        // Center the active card: 
+        // trackTranslate = (wrapperWidth / 2) - (cardWidth / 2) - (currentIndex * (cardWidth + gap))
+
+        const cardWidth = cards[0].offsetWidth; // 380px roughly
+        const gap = 32; // 2rem
+        const wrapperWidth = wrapper.offsetWidth;
+
+        // Simplecentering logic
+        const centerOffset = (wrapperWidth - cardWidth) / 2;
+        const moveAmount = (cardWidth + gap) * currentIndex;
+        const translate = centerOffset - moveAmount;
+
+        track.style.transform = `translateX(${translate}px)`;
+
+        // Update Dots
+        const dots = dotsContainer.querySelectorAll('.carousel-dot');
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+        });
+
+        // Update Counter
+        counter.querySelector('.current').textContent = currentIndex + 1;
+
+        // Button States
+        nav.querySelector('.prev').classList.toggle('disabled', currentIndex === 0);
+        nav.querySelector('.next').classList.toggle('disabled', currentIndex === cards.length - 1);
+    }
+
+    // Event Listeners for Arrows
+    nav.querySelector('.prev').addEventListener('click', () => updateCarousel(currentIndex - 1));
+    nav.querySelector('.next').addEventListener('click', () => updateCarousel(currentIndex + 1));
+
+    // Initial Trigger (delayed slightly to ensure layout)
+    setTimeout(() => updateCarousel(0), 100);
+
+    // Resize Handler
+    window.addEventListener('resize', () => updateCarousel(currentIndex));
 }

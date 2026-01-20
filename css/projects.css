@@ -17,11 +17,22 @@
 }
 
 /* === Projects Grid === */
+/* === Projects Grid === */
 .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1rem;
+    display: block;
+    /* Make this a block container */
     margin-top: 3rem;
+}
+
+.level-projects {
+    display: grid;
+    /* Apply grid here for the cards */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    animation: fadeIn 0.5s ease-out;
+    position: relative;
+    /* Added for absolute positioning of carousel nav */
 }
 
 /* === Project Card (Game Level Style) === */
