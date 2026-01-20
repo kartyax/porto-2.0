@@ -34,7 +34,7 @@ document.getElementById('contact-container').innerHTML = `
                     </div>
 
                     <div class="social-links">
-                        <a href="#" class="social-btn">
+                        <a href="https://github.com/kartyax/" class="social-btn">
                             <img src="assets/icon/github-contact.png" class="social-icon-img" alt="GitHub"> GitHub
                         </a>
                         <a href="#" class="social-btn">

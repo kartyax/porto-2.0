@@ -523,6 +523,41 @@ function showDialog(index) {
     // Update Text & Character
     characterName.textContent = data.character;
     characterSprite.src = data.sprite;
+    let ctaBtn = document.getElementById('dialogCtaBtn');
+    if (!ctaBtn) {
+        ctaBtn = document.createElement('a');
+        ctaBtn.id = 'dialogCtaBtn';
+        ctaBtn.className = 'dialog-cta-btn';
+        if (dialogText && dialogText.parentNode) {
+            dialogText.parentNode.appendChild(ctaBtn);
+        }
+    }
+
+    if (data.actionBtn) {
+        ctaBtn.href = data.actionBtn.link;
+        ctaBtn.textContent = data.actionBtn.text;
+        ctaBtn.style.display = 'inline-block';
+
+        ctaBtn.onclick = function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const navHeight = document.getElementById('navbar') ? document.getElementById('navbar').offsetHeight : 70;
+                const pos = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                smoothScrollTo(pos, 1000);
+            }
+        };
+
+        ctaBtn.style.opacity = '0';
+        setTimeout(() => {
+            ctaBtn.style.transition = 'opacity 0.5s ease';
+            ctaBtn.style.opacity = '1';
+        }, 1000);
+
+    } else {
+        ctaBtn.style.display = 'none';
+    }
+
     if (dialogCounter) dialogCounter.textContent = `${index + 1} / ${dialogData.length}`;
 
     // Typewriter effect - PASS ELEMENT!
