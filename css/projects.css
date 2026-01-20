@@ -196,11 +196,33 @@
 }
 
 @media screen and (max-width: 480px) {
+    .projects-section {
+        padding: 60px 20px 60px 20px;
+        /* Reduce padding for mobile */
+    }
+
+    .projects-grid {
+        gap: 1.5rem;
+        /* Ensure gap isn't too small */
+    }
+
     .project-image {
         height: 150px;
     }
 
     .image-placeholder {
         font-size: 3rem;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        /* Force 1 column on very small screens */
+    }
+
+    .project-card {
+        margin: 0 -5px;
+        /* Slight negative margin handles super narrow screens if needed */
     }
 }

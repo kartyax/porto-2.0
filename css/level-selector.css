@@ -176,3 +176,35 @@
         /* Prevent clicks during zoom */
     }
 }
+
+/* === Responsive === */
+@media screen and (max-width: 768px) {
+    .level-selector {
+        gap: 1.5rem;
+    }
+
+    .level-card {
+        padding: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .level-selector {
+        grid-template-columns: 1fr;
+        /* Stack vertically on mobile */
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .level-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .level-icon {
+        font-size: 3rem;
+    }
+
+    .level-title {
+        font-size: 1rem;
+    }
+}
