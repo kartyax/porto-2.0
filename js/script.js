@@ -294,7 +294,7 @@ const dialogData = [
     },
     {
         character: "Kevin",
-        text: "Selain backend development, saya memiliki minat besar pada dunia security. Ketertarikan ini mendorong saya untuk memahami bagaimana sebuah sistem dapat diserang dan bagaimana cara mencegahnya.",
+        text: "Selain backend development, saya memiliki minat besar pada dunia security. Ketertarikan ini mendorong saya untuk memahami bagaimana sebuah sistem dapat diserang dan bagaimana cara mencegahnya??????.",
         sprite: "assets/pixel3-removebg-preview.png"
     },
     {
@@ -323,12 +323,43 @@ const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const continueIndicator = document.querySelector('.continue-indicator');
 
+// Web Audio API for Retro Typing Sound
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playTypingSound() {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    // Retro beep properties
+    oscillator.type = 'square';
+    // Randomize pitch slightly for natural feel (800Hz - 900Hz)
+    oscillator.frequency.value = 800 + Math.random() * 100;
+
+    gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime); // Low volume
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05); // Short decay
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + 0.05);
+}
+
 // Typewriter Effect
 function typeWriter(text, element, speed = 30) {
     return new Promise((resolve) => {
         isTyping = true;
+
+        // Ensure element exists before modifying
+        if (!element) {
+            console.error("TypeWriter Error: Element not found!");
+            resolve();
+            return;
+        }
+
         element.classList.add('typing');
-        continueIndicator.classList.add('hidden');
+        if (continueIndicator) continueIndicator.classList.add('hidden');
 
         let i = 0;
         element.textContent = '';
@@ -336,12 +367,18 @@ function typeWriter(text, element, speed = 30) {
         function type() {
             if (i < text.length) {
                 element.textContent += text.charAt(i);
+
+                // Play sound for every non-space character
+                if (text.charAt(i) !== ' ') {
+                    playTypingSound();
+                }
+
                 i++;
                 typewriterTimeout = setTimeout(type, speed);
             } else {
                 isTyping = false;
                 element.classList.remove('typing');
-                continueIndicator.classList.remove('hidden');
+                if (continueIndicator) continueIndicator.classList.remove('hidden');
                 resolve();
             }
         }
@@ -349,6 +386,7 @@ function typeWriter(text, element, speed = 30) {
         type();
     });
 }
+
 
 // Skip typewriter animation
 function skipTypewriter() {
