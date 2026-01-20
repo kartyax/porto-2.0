@@ -669,7 +669,7 @@ function showLevelSelector() {
     }
 }
 
-console.log('🎮 Level selector system ready!');
+console.log('Level selector system ready!');
 
 function initCarousel(levelContainer) {
     const projects = levelContainer.querySelectorAll('.project-card');
