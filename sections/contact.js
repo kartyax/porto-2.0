@@ -34,13 +34,13 @@ document.getElementById('contact-container').innerHTML = `
                     </div>
 
                     <div class="social-links">
-                        <a href="#" class="social-btn">
+                        <a href="https://github.com/kartyax/porto-2.0/blob/main/css/projects.css" class="social-btn">
                             <img src="assets/icon/github-contact.png" class="social-icon-img" alt="GitHub"> GitHub
                         </a>
-                        <a href="#" class="social-btn">
+                        <a href="https://www.linkedin.com/in/kevin-christian-aaa12b338 " class="social-btn">
                             <img src="assets/icon/linkedin-contact.png" class="social-icon-img" alt="LinkedIn"> LinkedIn
                         </a>
-                        <a href="#" class="social-btn">
+                        <a href="https://www.instagram.com/kvenn_" class="social-btn">
                             <img src="assets/icon/instagram-contact.png" class="social-icon-img" alt="Instagram"> Instagram
                         </a>
                     </div>

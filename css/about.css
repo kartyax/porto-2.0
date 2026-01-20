@@ -45,6 +45,47 @@
 .character-container {
     position: relative;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* === Floating 3D Title === */
+.floating-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.5rem;
+    color: #ffffff;
+    /* Gold color */
+    text-align: center;
+    margin-bottom: 10px;
+    /* Overlap slightly with head */
+    z-index: 10;
+    position: relative;
+
+    /* 3D Pixel Shadow Effect */
+    text-shadow:
+        4px 4px 0 #000,
+        -2px -2px 0 #000,
+        2px 2px 0 #000,
+        -2px 2px 0 #000,
+        4px 4px 0 #ffffff,
+        /* Darker Gold Shadow */
+        6px 6px 0 #000;
+
+    animation: floatTitle 3s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes floatTitle {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(2deg);
+    }
 }
 
 .character-sprite {
@@ -216,6 +257,47 @@
     border: 3px solid #3a3a3a;
 }
 
+/* === Dialog CTA Button (View Projects) === */
+.dialog-cta-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    color: #fff;
+    background: #ff5f5f;
+    /* Vibrant Red/Orange */
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    border: 4px solid #fff;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: pulseBtn 1.5s infinite;
+}
+
+.dialog-cta-btn:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 7px 7px 0 rgba(0, 0, 0, 0.5);
+    background: #ff3f3f;
+}
+
+.dialog-cta-btn:active {
+    transform: translate(0, 0);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+@keyframes pulseBtn {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
 /* Responsive Design for Dialog */
 @media screen and (max-width: 768px) {
     .about-section {
@@ -281,6 +363,11 @@
 
     .character-sprite {
         height: 200px;
+    }
+
+    .floating-title {
+        font-size: 1.5rem;
+        margin-bottom: -20px;
     }
 
     .dialog-text {

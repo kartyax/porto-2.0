@@ -283,30 +283,40 @@ console.log('👾 Created by Kevin');
 // ===== GAME DIALOG SYSTEM =====
 const dialogData = [
     {
-        character: "Kevin",
-        text: "Sudah tau saya? Yuk kenalan!",
+        character: "???????",
+        text: "Sudah tau saya belum? Yuk kenalan yukk!",
         sprite: "assets/pixel-removebg-preview.png"
     },
     {
-        character: "Kevin",
-        text: "Halo, nama saya Kevin Artya Christian.Saya adalah mahasiswa Teknik Informatika di Universitas Dian Nuswantoro (UDINUS) dengan ketertarikan pada backend development dan dunia keamanan sistem.",
+        character: "Kevin AS 'MAHASIGMA'",
+        text: "Haloo!, nama saya Kevin Artya Christian.Saya adalah mahasiswa Teknik Informatika di Universitas Dian Nuswantoro (UDINUS) dengan ketertarikan pada backend development dan dunia keamanan sistem.",
         sprite: "assets/pixel2-removebg-preview.png"
     },
     {
-        character: "Kevin",
-        text: "Selain backend development, saya memiliki minat besar pada dunia security. Ketertarikan ini mendorong saya untuk memahami bagaimana sebuah sistem dapat diserang dan bagaimana cara mencegahnya??????.",
+        character: "Kevin AS 'MAHASIGMA'",
+        text: "Selain backend development, saya memiliki minat besar pada dunia Cyber security. Ketertarikan ini mendorong saya untuk memahami bagaimana sebuah sistem dapat diserang dan bagaimana cara mencegahnya??????.",
         sprite: "assets/pixel3-removebg-preview.png"
     },
     {
+        character: "Kevin AS 'BJIRYA(BJORKA)'",
+        text: "Saya tertarik mempelajari konsep seperti web security, vulnerability (SQL Injection, XSS, CSRF), keamanan API, serta praktik secure coding.",
+        sprite: "assets/hacker.png",
+        bgImage: "assets/hackerroom.png"
+    },
+    {
         character: "Kevin AS 'SATPAM'",
-        text: "Saya tertarik mempelajari konsep seperti web security, vulnerability (SQL Injection, XSS, CSRF), keamanan API, serta praktik secure coding. Bagi saya, backend bukan hanya soal membuat aplikasi berjalan, tetapi juga memastikan data pengguna terlindungi, sistem tidak mudah dieksploitasi, dan arsitektur dibangun dengan kesadaran keamanan sejak awal..",
+        text: "Bagi saya, backend bukan hanya soal membuat aplikasi berjalan, tetapi juga memastikan data pengguna terlindungi, sistem tidak mudah dieksploitasi, dan arsitektur dibangun dengan kesadaran keamanan sejak awal..",
         sprite: "assets/pixel4-removebg-preview.png",
         bgImage: "assets/gudangserver.png"
     },
     {
-        character: "Kevin",
-        text: "Yuk kepoin Project gueh!",
-        sprite: "assets/pixel5-removebg-preview.png"
+        character: "Kevin AS 'MAHASIGMA'",
+        text: "Sekian ABOUT GUEH, Yuk kepoin Project gueh!",
+        sprite: "assets/pixel5-removebg-preview.png",
+        actionBtn: {
+            text: "LIHAT PROJECT",
+            link: "#projects"
+        }
     }
 ];
 
@@ -523,6 +533,46 @@ function showDialog(index) {
     // Update Text & Character
     characterName.textContent = data.character;
     characterSprite.src = data.sprite;
+    // Check for existing CTA button or create one
+    let ctaBtn = document.getElementById('dialogCtaBtn');
+    if (!ctaBtn) {
+        ctaBtn = document.createElement('a');
+        ctaBtn.id = 'dialogCtaBtn';
+        ctaBtn.className = 'dialog-cta-btn';
+        // Insert after dialog text inside dialog content
+        if (dialogText && dialogText.parentNode) {
+            dialogText.parentNode.appendChild(ctaBtn);
+        }
+    }
+
+    // Handle CTA Button Visibility
+    if (data.actionBtn) {
+        ctaBtn.href = data.actionBtn.link;
+        ctaBtn.textContent = data.actionBtn.text;
+        ctaBtn.style.display = 'inline-block';
+
+        // Smooth scroll listener
+        ctaBtn.onclick = function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const navHeight = document.getElementById('navbar') ? document.getElementById('navbar').offsetHeight : 70;
+                const pos = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                smoothScrollTo(pos, 1000);
+            }
+        };
+
+        // Delay appearance until typing finishes (optional, or immediate)
+        ctaBtn.style.opacity = '0';
+        setTimeout(() => {
+            ctaBtn.style.transition = 'opacity 0.5s ease';
+            ctaBtn.style.opacity = '1';
+        }, 1000);
+
+    } else {
+        ctaBtn.style.display = 'none';
+    }
+
     if (dialogCounter) dialogCounter.textContent = `${index + 1} / ${dialogData.length}`;
 
     // Typewriter effect - PASS ELEMENT!
