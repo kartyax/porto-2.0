@@ -689,8 +689,15 @@ function initCarousel(levelContainer) {
 
     // IMPORTANT: Change display from grid to block for carousel mode
     levelContainer.style.display = 'block';
-    levelContainer.style.maxWidth = '100%';
+
+    // Calculate max-width to fit viewport (viewport width - section padding)
+    const viewportWidth = window.innerWidth;
+    const sectionPadding = 200; // 100px left + 100px right from .projects-section
+    const maxCarouselWidth = Math.min(1200, viewportWidth - sectionPadding);
+
+    levelContainer.style.maxWidth = maxCarouselWidth + 'px';
     levelContainer.style.margin = '0 auto';
+    levelContainer.style.width = '100%';
 
     // Create Structure
     const wrapper = document.createElement('div');
@@ -733,8 +740,42 @@ function initCarousel(levelContainer) {
     levelContainer.innerHTML = ''; // Clear original container
     levelContainer.appendChild(wrapper);
     levelContainer.appendChild(nav); // Appended to container
-    levelContainer.appendChild(dotsContainer);
-    levelContainer.appendChild(counter);
+
+    // Append dots and counter to header with proper structure
+    const projectsHeader = document.querySelector('.projects-header');
+    if (projectsHeader) {
+        // Create wrappers for layout
+        const leftWrapper = document.createElement('div');
+        leftWrapper.className = 'projects-header-left';
+
+        const centerWrapper = document.createElement('div');
+        centerWrapper.className = 'projects-header-center';
+
+        const rightWrapper = document.createElement('div');
+        rightWrapper.className = 'projects-header-right';
+        // Empty spacer for grid balance
+
+        // Move existing button and subtitle to left wrapper
+        const backBtn = projectsHeader.querySelector('#backToLevels');
+        const subtitle = projectsHeader.querySelector('#projectSubtitle');
+
+        if (backBtn) leftWrapper.appendChild(backBtn);
+        if (subtitle) leftWrapper.appendChild(subtitle);
+
+        // Add dots and counter to center wrapper
+        centerWrapper.appendChild(dotsContainer);
+        centerWrapper.appendChild(counter);
+
+        // Clear and rebuild header
+        projectsHeader.innerHTML = '';
+        projectsHeader.appendChild(leftWrapper);
+        projectsHeader.appendChild(centerWrapper);
+        projectsHeader.appendChild(rightWrapper);
+    } else {
+        // Fallback if header not found
+        levelContainer.appendChild(dotsContainer);
+        levelContainer.appendChild(counter);
+    }
 
     // State
     let currentIndex = 0;

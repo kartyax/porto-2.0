@@ -143,8 +143,10 @@
 .carousel-dots {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 0.5rem;
-    margin-top: 1rem;
+    margin: 0;
+    /* Removed margin-top for header layout */
 }
 
 .carousel-dot {
@@ -184,20 +186,21 @@
 
 /* Counter */
 .carousel-counter {
-    position: relative;
-    display: block;
-    text-align: center;
+    display: inline-block;
+    /* Changed from block for inline header layout */
     font-family: 'Press Start 2P', cursive;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
+    /* Slightly smaller for header */
     color: var(--text-light);
-    margin-top: 1rem;
+    margin: 0;
+    /* Removed margin-top */
     text-shadow: 2px 2px 0 var(--text-shadow);
-    z-index: 5;
+    white-space: nowrap;
 }
 
 .carousel-counter .current {
     color: var(--primary-color);
-    font-size: 1rem;
+    font-size: 0.75rem;
     margin: 0 0.5rem;
 }
 

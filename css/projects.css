@@ -17,11 +17,55 @@
 }
 
 /* === Projects Grid === */
-/* === Projects Grid === */
 .projects-grid {
     display: block;
     /* Make this a block container */
     margin-top: 3rem;
+}
+
+/* Projects Header - Contains back button, dots, and counter */
+.projects-header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    /* Left (flexible), Center (auto), Right (flexible) */
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.projects-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+    justify-self: start;
+    /* Align to left of its grid cell */
+}
+
+.projects-header-center {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    justify-self: center;
+    /* Center in the middle grid cell */
+}
+
+.projects-header-right {
+    /* Empty spacer for grid balance */
+    justify-self: end;
+}
+
+.projects-header .pixel-btn {
+    flex-shrink: 0;
+}
+
+.project-subtitle {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.65rem;
+    color: var(--text-light);
+    text-shadow: 2px 2px 0 var(--text-shadow);
+    margin: 0;
+    flex-shrink: 0;
 }
 
 .level-projects {
