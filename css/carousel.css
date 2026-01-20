@@ -16,8 +16,8 @@
     perspective: 1000px;
     display: block;
     /* Change from flex to block to avoid conflicting alignment */
-    overflow: hidden;
-    /* Ensure content stays within bounds */
+    overflow: visible;
+    /* Changed to visible to prevent clipping navigation arrows */
     min-height: 300px;
 }
 
@@ -90,14 +90,16 @@
     position: absolute;
     top: 50%;
     left: 0;
-    width: 100%;
+    right: 0;
     transform: translateY(-50%);
     display: flex;
     justify-content: space-between;
     pointer-events: none;
-    z-index: 100;
-    /* Increased Z-Index significantly */
-    padding: 0;
+    z-index: 999;
+    padding: 0 2rem;
+    /* Padding to position arrows inside container edges */
+    max-width: 100%;
+    /* Ensure it doesn't exceed parent width */
 }
 
 .carousel-arrow {
@@ -199,34 +201,7 @@
     margin: 0 0.5rem;
 }
 
-/* Responsive */
-@media screen and (min-width: 768px) {
-    .carousel-track .project-card {
-        flex: 0 0 calc(50% - 2rem);
-    }
 
-    .carousel-track .project-card:not(.active) {
-        opacity: 0.4;
-        transform: scale(0.85);
-    }
-}
-
-@media screen and (min-width: 1200px) {
-    .carousel-track .project-card {
-        flex: 0 0 calc(33.333% - 2rem);
-    }
-}
-
-@media screen and (max-width: 767px) {
-    .carousel-arrow {
-        font-size: 1rem;
-        padding: 0.8rem 1.2rem;
-    }
-
-    .carousel-nav {
-        padding: 0 0.5rem;
-    }
-}
 
 /* Slide Animations */
 .slide-enter {

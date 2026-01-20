@@ -687,6 +687,11 @@ function initCarousel(levelContainer) {
     const projects = Array.from(levelContainer.querySelectorAll('.project-card'));
     if (projects.length === 0) return;
 
+    // IMPORTANT: Change display from grid to block for carousel mode
+    levelContainer.style.display = 'block';
+    levelContainer.style.maxWidth = '100%';
+    levelContainer.style.margin = '0 auto';
+
     // Create Structure
     const wrapper = document.createElement('div');
     wrapper.className = 'carousel-wrapper';
