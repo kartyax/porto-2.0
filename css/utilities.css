@@ -1,0 +1,127 @@
+/* ============================================
+   UTILITIES - Buttons, Titles, Shared Components
+   ============================================ */
+
+/* === Section Titles === */
+.section-title-main {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2rem;
+    color: var(--text-light);
+    text-align: center;
+    text-shadow: 4px 4px 0 var(--text-shadow);
+    margin-bottom: var(--spacing-sm);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.section-subtitle {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 0 var(--text-shadow);
+}
+
+/* === Pixel Buttons === */
+.pixel-btn {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    padding: 1rem 2rem;
+    border: 4px solid var(--text-light);
+    background: transparent;
+    color: var(--text-light);
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition-fast);
+    text-shadow: 2px 2px 0 var(--text-shadow);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.pixel-btn.primary {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.pixel-btn.secondary {
+    background: transparent;
+    border-color: var(--text-light);
+}
+
+.pixel-btn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+}
+
+.pixel-btn.primary:hover {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.pixel-btn.secondary:hover {
+    background: var(--text-light);
+    color: var(--dark-bg);
+}
+
+.pixel-btn:active {
+    transform: translate(0, 0);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Small Pixel Buttons */
+.pixel-btn-small {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.5rem;
+    padding: 0.6rem 1rem;
+    border: 3px solid var(--text-light);
+    background: transparent;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+    flex: 1;
+}
+
+.pixel-btn-small.primary {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.pixel-btn-small:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+}
+
+.pixel-btn-small.primary:hover {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.pixel-btn-small.secondary:hover {
+    background: var(--text-light);
+    color: var(--dark-bg);
+}
+
+/* === Responsive === */
+@media screen and (max-width: 768px) {
+    .section-title-main {
+        font-size: 1.5rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .section-title-main {
+        font-size: 1.2rem;
+    }
+
+    .pixel-btn {
+        font-size: 0.6rem;
+        padding: 0.8rem 1.5rem;
+    }
+}

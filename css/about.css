@@ -1,0 +1,359 @@
+/* ============================================
+   ABOUT SECTION - GAME DIALOG STYLE
+   ============================================ */
+
+.about-section {
+    position: relative;
+    width: auto;
+    min-height: 100vh;
+    background-image: url('../assets/udinus.png');
+    background-size: cover;
+    background-position: center;
+    padding: 50px 0px 50px;
+    scroll-margin-top: 100px;
+}
+
+/* Game Container */
+.game-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 80px;
+}
+
+/* Background Image */
+.game-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated;
+}
+
+/* Character Sprite */
+.character-container {
+    position: relative;
+    z-index: 2;
+}
+
+.character-sprite {
+    height: 450px;
+    image-rendering: pixelated;
+    filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.5));
+    animation: characterBreathe 3s ease-in-out infinite;
+}
+
+@keyframes characterFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes characterBreathe {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Dialog Box */
+.dialog-box {
+    position: relative;
+    z-index: 3;
+    width: 90%;
+    max-width: 900px;
+    background: rgba(240, 240, 240, 0.95);
+    border: 6px solid #2c2c2c;
+    box-shadow:
+        0 8px 16px rgba(0, 0, 0, 0.6),
+        inset 0 2px 0 rgba(255, 255, 255, 0.5);
+    margin-bottom: 0px;
+    animation: dialogSlideUp 0.5s ease-out;
+    image-rendering: pixelated;
+}
+
+@keyframes dialogSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Dialog Header */
+.dialog-header {
+    background: var(--dark-bg);
+    padding: 0.8rem 1.5rem;
+    border-bottom: 4px solid #1a1a1a;
+}
+
+.character-name {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    text-shadow: 2px 2px 0 #000;
+}
+
+/* Dialog Content */
+.dialog-content {
+    padding: 1rem;
+    min-height: 150px;
+    position: relative;
+    background: linear-gradient(to bottom, #f5f5f5 0%, #e8e8e8 100%);
+}
+
+.dialog-text {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.85rem;
+    color: #1a1a1a;
+    line-height: 1.8;
+    min-height: 80px;
+    margin: 0;
+    word-wrap: break-word;
+}
+
+/* Typing cursor effect */
+.dialog-text.typing::after {
+    content: '▌';
+    animation: blink 0.7s infinite;
+    margin-left: 4px;
+}
+
+/* Continue Indicator */
+.continue-indicator {
+    position: absolute;
+    bottom: 1rem;
+    right: 1.5rem;
+    animation: bounce 1.5s infinite;
+}
+
+.continue-indicator.hidden {
+    display: none;
+}
+
+.arrow-down {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    text-shadow: 1px 1px 0 #000;
+}
+
+/* Dialog Navigation */
+.dialog-nav {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 100%;
+    justify-content: center;
+    z-index: 4;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    /* Remove transform translate since we use flex center */
+}
+
+.dialog-btn {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.65rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--secondary-color);
+    color: var(--text-light);
+    border: 4px solid #3a3a3a;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 0 #000;
+}
+
+.dialog-btn:hover:not(:disabled) {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+    background: #5a5a5a;
+}
+
+.dialog-btn:active:not(:disabled) {
+    transform: translate(0, 0);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.dialog-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.dialog-counter {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    color: var(--text-light);
+    text-shadow: 2px 2px 0 #000;
+    padding: 0.5rem 1rem;
+    background: rgba(44, 44, 44, 0.8);
+    border: 3px solid #3a3a3a;
+}
+
+/* Responsive Design for Dialog */
+@media screen and (max-width: 768px) {
+    .about-section {
+        min-height: auto;
+        padding: 120px 20px 40px;
+    }
+
+    .game-container {
+        min-height: auto;
+        padding-bottom: 20px;
+    }
+
+    .character-container {
+        left: 20px;
+        bottom: 80px;
+    }
+
+    .character-sprite {
+        height: 300px;
+    }
+
+    .dialog-box {
+        width: 95%;
+        margin-bottom: 80px;
+    }
+
+    .dialog-content {
+        padding: 1.5rem;
+        min-height: 120px;
+    }
+
+    .dialog-text {
+        font-size: 0.7rem;
+        line-height: 1.6;
+    }
+
+    .character-name {
+        font-size: 0.75rem;
+    }
+
+    .dialog-nav {
+        bottom: 15px;
+        gap: 0.5rem;
+    }
+
+    .dialog-btn {
+        font-size: 0.55rem;
+        padding: 0.6rem 1rem;
+    }
+
+    .dialog-counter {
+        font-size: 0.6rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .character-container {
+        left: 10px;
+        bottom: 60px;
+    }
+
+    .character-sprite {
+        height: 200px;
+    }
+
+    .dialog-text {
+        font-size: 0.6rem;
+    }
+
+    .dialog-btn {
+        font-size: 0.5rem;
+        padding: 0.5rem 0.8rem;
+    }
+}
+
+/* === BACKGROUND GLITCH ANIMATION === */
+.bg-glitch-active {
+    animation: bgGlitch 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+    position: relative;
+}
+
+.bg-glitch-active::before,
+.bg-glitch-active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+    /* Use same background image */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.8;
+    z-index: -1;
+}
+
+.bg-glitch-active::before {
+    transform: translate(5px, 0);
+    filter: drop-shadow(-5px 0 red);
+    animation: bgGlitch 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite reverse;
+}
+
+.bg-glitch-active::after {
+    transform: translate(-5px, 0);
+    filter: drop-shadow(5px 0 blue);
+    animation: bgGlitch 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+}
+
+@keyframes bgGlitch {
+    0% {
+        transform: translate(0);
+        filter: hue-rotate(0deg) contrast(1);
+    }
+
+    20% {
+        transform: translate(-5px, 5px);
+        filter: hue-rotate(90deg) contrast(1.2);
+    }
+
+    40% {
+        transform: translate(-5px, -5px);
+        filter: hue-rotate(0deg) contrast(1);
+    }
+
+    60% {
+        transform: translate(5px, 5px);
+        filter: hue-rotate(180deg) contrast(1.5) invert(0.1);
+    }
+
+    80% {
+        transform: translate(5px, -5px);
+        filter: hue-rotate(0deg) contrast(1);
+    }
+
+    100% {
+        transform: translate(0);
+        filter: hue-rotate(0deg) contrast(1);
+    }
+}

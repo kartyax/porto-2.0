@@ -1,0 +1,325 @@
+/* ============================================
+   SKILLS SECTION
+   ============================================ */
+
+.skills-section {
+    min-height: auto;
+    background: var(--darker-bg);
+    padding: 60px 8vh 100px;
+    position: relative;
+    overflow: hidden;
+    scroll-margin-top: 100px;
+}
+
+.skills-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* === Skills Content Layout === */
+.skills-content {
+    display: grid;
+    /* Kolom 1 & 2 lebar, Kolom 3 sempit (Tools) */
+    grid-template-columns: 1fr 1fr 120px;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* === Skill Category Panel === */
+.skill-category {
+    background: var(--bg-card);
+    border: 4px solid var(--text-light);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    animation: fadeInUp 0.8s ease-out backwards;
+}
+
+.skill-category:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.skill-category:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.skill-category:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+/* === Category Header === */
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid rgba(160, 160, 160, 0.2);
+}
+
+.category-icon {
+    font-size: 2rem;
+    filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.5));
+}
+
+.category-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 0 var(--text-shadow);
+}
+
+/* === Skill List === */
+.skill-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* === Individual Skill Item === */
+.skill-item {
+    opacity: 0;
+    animation: skillFadeIn 0.5s ease-out forwards;
+}
+
+.skill-item:nth-child(1) {
+    animation-delay: 0.4s;
+}
+
+.skill-item:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.skill-item:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.skill-item:nth-child(4) {
+    animation-delay: 0.7s;
+}
+
+@keyframes skillFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* === Skill Info (Name + Level) === */
+.skill-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.skill-name {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    color: var(--text-light);
+    text-shadow: 2px 2px 0 var(--text-shadow);
+}
+
+.skill-level {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.6rem;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 0 var(--text-shadow);
+}
+
+/* === Skill Bar Container === */
+.skill-bar-container {
+    background: var(--dark-bg);
+    border: 3px solid var(--text-light);
+    height: 30px;
+    position: relative;
+    box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* === Skill Bar (Animated) === */
+.skill-bar {
+    height: 100%;
+    background: linear-gradient(90deg,
+            var(--primary-color) 0%,
+            var(--secondary-color) 100%);
+    position: relative;
+    overflow: hidden;
+    transition: width 1.5s ease-out;
+    animation: barGlow 2s ease-in-out infinite;
+}
+
+@keyframes barGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(160, 160, 160, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(160, 160, 160, 0.5);
+    }
+}
+
+/* === Skill Bar Fill Effect === */
+.skill-bar-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.2) 50%,
+            transparent 100%);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* === Tools Section === */
+/* Removed .tools-section styles as we use .skill-category now */
+
+/* === Tools Grid Container (Mask) === */
+.tools-grid {
+    position: relative;
+    overflow: hidden;
+    /* Batasi tinggi agar tidak terlalu panjang */
+    height: 100%;
+    max-height: 300px;
+    width: 100%;
+    align-self: start;
+    /* Supaya tidak stretch mengikuti kolom sebelah */
+
+    /* Masking untuk efek fade in/out atas bawah */
+    mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+    padding: 1rem 0;
+}
+
+/* === Tools Track (Animated) === */
+.tools-track {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    /* Animasi Loop Mulus */
+    animation: scrollVertical 8s linear infinite;
+}
+
+/* === Keyframes untuk Infinite Scroll === */
+@keyframes scrollVertical {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+/* === Tool Icon Wrapper (Clean / No Border) === */
+.tool-icon-wrapper {
+    background: transparent;
+    border: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    /* Hapus shadow kotak */
+    box-shadow: none;
+}
+
+/* Hapus delay animasi, semua setara */
+.tool-icon-wrapper:nth-child(n) {
+    animation: none;
+}
+
+.tool-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    /* Efek shadow pada icon sebagai gantinya */
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+}
+
+/* Hover Effect pada Icon saja */
+.tool-icon-wrapper:hover .tool-icon {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 10px var(--primary-color));
+}
+
+/* Bersihkan sisa style sebelumnya */
+.tool-icon-wrapper::before {
+    content: none;
+}
+
+.tool-icon-wrapper:hover {
+    transform: none;
+    box-shadow: none;
+    border: none;
+}
+
+/* === Responsive === */
+@media screen and (max-width: 1024px) {
+    .skills-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .skill-category {
+        padding: 1.5rem;
+    }
+
+    .category-title,
+    .tools-title {
+        font-size: 0.85rem;
+    }
+
+    .skill-name {
+        font-size: 0.6rem;
+    }
+
+    .tools-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .skill-category {
+        padding: 1rem;
+    }
+
+    .category-title,
+    .tools-title {
+        font-size: 0.7rem;
+    }
+
+    .skill-name {
+        font-size: 0.55rem;
+    }
+
+    .skill-level {
+        font-size: 0.5rem;
+    }
+
+    .tool-badge {
+        font-size: 0.5rem;
+        padding: 0.8rem;
+    }
+}

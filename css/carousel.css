@@ -1,0 +1,255 @@
+/* ============================================
+   PROJECT CAROUSEL - ARCADE STYLE
+   Carousel untuk project cards dengan animasi
+   ============================================ */
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 0;
+}
+
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+    perspective: 1000px;
+    display: block;
+    /* Change from flex to block to avoid conflicting alignment */
+    overflow: hidden;
+    /* Ensure content stays within bounds */
+    min-height: 300px;
+}
+
+.carousel-track {
+    display: flex;
+    justify-content: flex-start;
+    width: max-content;
+    /* Allow width to grow with content */
+    transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    gap: 2rem;
+    padding: 2rem 0;
+    /* Remove horizontal padding */
+    margin: 0 auto;
+    /* Ensure no auto margins mess up calculations */
+}
+
+/* Project Card in Carousel */
+.carousel-track .project-card {
+    flex: 0 0 380px;
+    max-width: 390px;
+    min-height: 300px;
+    margin: 0 auto;
+    opacity: 0.5;
+    transform: scale(0.85);
+    transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    position: relative;
+}
+
+.carousel-track .project-card.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 10;
+    box-shadow: 0 20px 60px rgba(160, 160, 160, 0.4),
+        0 0 0 5px var(--primary-color),
+        10px 10px 0 rgba(0, 0, 0, 0.8);
+}
+
+.carousel-track .project-card.active::before {
+    content: '▶ NOW PLAYING ◀';
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.6rem;
+    color: var(--primary-color);
+    text-shadow: 3px 3px 0 var(--text-shadow);
+    animation: blink 1.5s infinite;
+    z-index: 20;
+    white-space: nowrap;
+}
+
+@keyframes blink {
+
+    0%,
+    50%,
+    100% {
+        opacity: 1;
+    }
+
+    25%,
+    75% {
+        opacity: 0.3;
+    }
+}
+
+/* Navigation Arrows */
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 15;
+    padding: 0 1rem;
+}
+
+.carousel-arrow {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.5rem;
+    background: var(--bg-card);
+    color: var(--primary-color);
+    border: 4px solid var(--primary-color);
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    pointer-events: all;
+    transition: var(--transition-fast);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+    position: relative;
+    user-select: none;
+}
+
+.carousel-arrow:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.5);
+    background: var(--primary-color);
+    color: var(--darker-bg);
+}
+
+.carousel-arrow:active {
+    transform: translate(0, 0);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.carousel-arrow.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Dots Indicator */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.carousel-dot {
+    width: 16px;
+    height: 16px;
+    background: var(--dark-bg);
+    border: 3px solid var(--text-light);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.carousel-dot:hover {
+    background: var(--secondary-color);
+    transform: scale(1.2);
+}
+
+.carousel-dot.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 20px rgba(160, 160, 160, 0.6),
+        3px 3px 0 rgba(0, 0, 0, 0.3);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* Counter */
+.carousel-counter {
+    position: relative;
+    display: block;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    color: var(--text-light);
+    margin-top: 1rem;
+    text-shadow: 2px 2px 0 var(--text-shadow);
+    z-index: 5;
+}
+
+.carousel-counter .current {
+    color: var(--primary-color);
+    font-size: 1rem;
+    margin: 0 0.5rem;
+}
+
+/* Responsive */
+@media screen and (min-width: 768px) {
+    .carousel-track .project-card {
+        flex: 0 0 calc(50% - 2rem);
+    }
+
+    .carousel-track .project-card:not(.active) {
+        opacity: 0.4;
+        transform: scale(0.85);
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .carousel-track .project-card {
+        flex: 0 0 calc(33.333% - 2rem);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .carousel-arrow {
+        font-size: 1rem;
+        padding: 0.8rem 1.2rem;
+    }
+
+    .carousel-nav {
+        padding: 0 0.5rem;
+    }
+}
+
+/* Slide Animations */
+.slide-enter {
+    animation: slideIn 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.slide-exit {
+    animation: slideOut 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100px) scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(-100px) scale(0.8);
+    }
+}

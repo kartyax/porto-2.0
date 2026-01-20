@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio Kevin - Pixel Art Theme">
+    <title>Kevin's Portfolio</title>
+    <!-- Base & Utilities -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/utilities.css">
+
+    <!-- Components & Sections -->
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="css/projects.css">
+    <link rel="stylesheet" href="css/level-selector.css">
+    <link rel="stylesheet" href="css/carousel.css">
+    <link rel="stylesheet" href="css/skills.css">
+    <link rel="stylesheet" href="css/contact.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-logo">
+            <span class="pixel-text">PORTOFOLIO</span>
+        </div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#home" class="nav-link active">HOME</a></li>
+            <li><a href="#about" class="nav-link">ABOUT</a></li>
+            <li><a href="#projects" class="nav-link">PROJECTS</a></li>
+            <li><a href="#skills" class="nav-link">SKILLS</a></li>
+            <li><a href="#contact" class="nav-link">CONTACT</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Tetap di sini sebagai Home) -->
+    <section class="hero" id="home">
+        <!-- Video Background -->
+        <div class="video-background">
+            <video autoplay loop muted playsinline id="bgVideo">
+                <source src="assets/video.webm" type="video/webm">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <div class="text-container">
+                <h1 class="glitch-text" data-text="HALO SAYA KEVIN ARTYA CHRISTIAN">HALO SAYA KEVIN ARTYA CHRISTIAN
+                </h1>
+                <p class="subtitle fade-in">Web Developer & Creative Designer</p>
+                <div class="cta-container">
+                    <a href="#projects" class="pixel-btn primary" style="text-decoration: none;">Lihat Project</a>
+                    <a href="#contact" class="pixel-btn secondary" style="text-decoration: none;">Hubungi Saya</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Injection Containers -->
+    <div id="about-container"></div>
+    <div id="projects-container"></div>
+    <div id="skills-container"></div>
+    <div id="contact-container"></div>
+
+    <!-- Pixel Decorations -->
+    <div class="pixel-particles"></div>
+
+    <!-- Scripts -->
+    <!-- Content Injection Scripts -->
+    <script src="sections/about.js"></script>
+    <script src="sections/projects.js"></script>
+    <script src="sections/skills.js"></script>
+    <script src="sections/contact.js"></script>
+
+    <!-- Main Logic -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>

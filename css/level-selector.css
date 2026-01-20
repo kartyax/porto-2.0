@@ -1,0 +1,148 @@
+/* ============================================
+   LEVEL SELECTOR - ARCADE GAME STYLE
+   Style untuk level selection cards
+   ============================================ */
+.level-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.level-card {
+    background: var(--bg-card);
+    border: 4px solid var(--text-light);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    position: relative;
+    animation: fadeInUp 0.6s ease-out backwards;
+}
+
+.level-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.level-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.level-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.level-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.5);
+    border-color: var(--primary-color);
+}
+
+.level-card:active {
+    transform: translate(0, 0);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.level-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.3));
+    animation: float 3s ease-in-out infinite;
+}
+
+.level-card:nth-child(1) .level-icon {
+    animation-delay: 0s;
+}
+
+.level-card:nth-child(2) .level-icon {
+    animation-delay: 0.5s;
+}
+
+.level-card:nth-child(3) .level-icon {
+    animation-delay: 1s;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.level-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 0 var(--text-shadow);
+    margin-bottom: 0.8rem;
+}
+
+.level-desc {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.65rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.level-badge {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.6rem;
+    background: var(--dark-bg);
+    color: var(--primary-color);
+    padding: 0.6rem 1rem;
+    border: 3px solid var(--primary-color);
+    display: inline-block;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Back Button */
+.back-to-levels {
+    grid-column: 1 / -1;
+    margin-bottom: 0.5rem;
+    justify-self: start;
+}
+
+/* Level Projects Container */
+.level-projects {
+    grid-column: 1 / -1;
+    display: block;
+    width: 100%;
+    position: relative;
+}
+
+/* Projects Grid when showing */
+.projects-grid.active {
+    display: grid;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Level Selector hide animation */
+/* Level Selector hide animation (Zoom Into Screen) */
+.level-selector.hide {
+    animation: zoomIntoScreen 0.5s ease-in forwards;
+    /* Ensure it stays on top during zoom */
+    position: relative;
+    z-index: 10;
+}
+
+@keyframes zoomIntoScreen {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(3);
+        pointer-events: none;
+        /* Prevent clicks during zoom */
+    }
+}
